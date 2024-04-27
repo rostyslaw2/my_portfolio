@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const ejs = require('ejs')
+
+
+
 app.set('view engine', 'ejs')
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -26,4 +29,5 @@ app.get('/basa', function (req, res) { // get просто відкриває ф
 })
 
 console.log('Example app listening on port 4000!')
-app.listen(basa)
+app.listen(basa) 
+
