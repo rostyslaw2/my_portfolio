@@ -6,6 +6,8 @@ require("dotenv").config();
 const Cart = require("./models/Cart1");
 app.engine("ejs", require("ejs").renderFile);
 app.set("view engine", "ejs");
+const port = process.env.PORT || 3000;
+
 
 app.use(express.static(__dirname + "/views"));
 
@@ -46,6 +48,7 @@ app.get('/all', async(req, res) => { // get просто відкриває фа
 
 const start = async () => { // робить асинхронну функцію
   try {  // запоскає код
+    app.listen(port); //port
     await mongoose.connect(`${process.env.DB_URL}`) //чекає підключення бази даних
     app.listen(3000)
     console.log('Connected to database')
