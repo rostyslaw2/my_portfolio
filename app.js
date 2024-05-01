@@ -4,6 +4,9 @@ const ejs = require('ejs')
 const mongoose = require('mongoose')
 require("dotenv").config();
 const Cart = require("./models/Cart");
+require("dotenv").config();
+app.engine("ejs", require("ejs").renderFile);
+app.set("view engine", "ejs");
 
 app.set('view engine', 'ejs')
 const bodyParser = require('body-parser')
@@ -16,14 +19,11 @@ app.get('/', function (req, res) {
 app.post('/add', async (req, res) => { // post дістає з форми htmll
   const name = req.body.name
   const email = req.body.email
-  const newCart = new Cart({ name, email })
+  const age = req.body.age
+  const newCart = new Cart({ name, email, age })
   await newCart.save()
-  res.render('result', { name, email })
+  res.render('result', { name, email, age })
 })
-
-
-
-
 
 
 app.get('/basa', function (req, res) { // get просто відкриває файл
