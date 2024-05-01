@@ -8,6 +8,11 @@ require("dotenv").config();
 app.engine("ejs", require("ejs").renderFile);
 app.set("view engine", "ejs");
 
+app.use(express.static(__dirname + "/views"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static("public"));
+
+
 app.set('view engine', 'ejs')
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
