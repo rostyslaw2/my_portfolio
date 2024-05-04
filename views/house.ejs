@@ -62,44 +62,21 @@
             border-radius: 50%;
         }
     </style>
+    <a href="/all" >відкрити всі</a>
 </head>
 <body>
-    <form action="/add" method="post" enctype="multipart/form-data">
+    <form action="/add" method="post">
         <h2>Додати користувача</h2>
         <label for="name">Ім'я:</label>
         <input type="text" id="name" name="name" required>
         <label for="age">Вік:</label>
         <input type="text" id="age" name="age" required>
         <label for="avatar">Аватар:</label>
-        <div class="avatar-preview" id="avatar-preview">
-            <img src="#" alt="Avatar Preview" id="avatar-img" style="display: none;">
-        </div>
-        <input type="file" id="avatar" name="avatar" accept="image/*" required onchange="previewAvatar()">
-        <label for="password">Пароль:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="text" id="avatar" name="avatar" required>
+           
         <input type="submit" value="Додати користувача">
     </form>
 
-    <script>
-        function previewAvatar() { //Це початок оголошення функції previewAvatar, яка буде 
-          //викликатися, коли користувач обирає файл аватарки.
-            const preview = document.getElementById('avatar-img'); //Ця рядок знаходить елемент з ідентифікатором 'avatar-img', який зазвичай
-            // є зображенням попереднього перегляду. Він зберігає цей елемент у змінній
-            const file = document.getElementById('avatar').files[0];
-            const reader = new FileReader(); //читає файл
 
-            reader.onloadend = function () {
-                preview.src = reader.result;//Ця рядок встановлює результат читання файлу 
-                preview.style.display = 'block';//Ця рядок змінює стиль попереднього перегляду
-            }
-
-            if (file) {
-                reader.readAsDataURL(file); //читає шлях
-            } else {
-                preview.src = '';
-                preview.style.display = 'none';//Ця рядок приховує попередній перегляд зображення, встановлюючи його стиль display на none.
-            }
-        }
-    </script>
 </body>
 </html>

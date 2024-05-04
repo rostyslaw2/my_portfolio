@@ -1,0 +1,27 @@
+    <script>
+        function previewAvatar() { //Це початок оголошення функції previewAvatar, яка буде 
+          //викликатися, коли користувач обирає файл аватарки.
+            const preview = document.getElementById('avatar-img'); //Ця рядок знаходить елемент з ідентифікатором 'avatar-img', який зазвичай
+            // є зображенням попереднього перегляду. Він зберігає цей елемент у змінній
+            const file = document.getElementById('avatar').files[0];
+            const reader = new FileReader(); //читає файл
+
+            reader.onloadend = function () {
+                preview.src = reader.result;//Ця рядок встановлює результат читання файлу 
+                preview.style.display = 'block';//Ця рядок змінює стиль попереднього перегляду
+            }
+
+            if (file) {
+                reader.readAsDataURL(file); //читає шлях
+            } else {
+                preview.src = '';
+                preview.style.display = 'none';//Ця рядок приховує попередній перегляд зображення, встановлюючи його стиль display на none.
+            }
+        }
+    </script>
+
+
+      <div class="avatar-preview" id="avatar-preview">
+            <img src="#" alt="Avatar Preview" id="avatar-img" style="display: none;">
+        </div>
+        <input type="file" id="avatar" name="avatar" accept="image/*" required onchange="previewAvatar()">

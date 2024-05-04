@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const ejs = require('ejs')
 const mongoose = require('mongoose')
-const multer = require('multer'); // Для обробки завантажених файлів
+//const multer = require('multer'); // Для обробки завантажених файлів
 const path = require('path');
 
 // Підключення dotenv для завантаження змінних середовища з файлу .env
@@ -18,23 +18,23 @@ const port = process.env.PORT || 3000;
 // Встановлення шляху до папки views для статичних файлів
 app.use(express.static(__dirname + "/views"));
 // Встановлення шляху до папки public для статичних файлів (наприклад, CSS, JavaScript)
-app.use(express.static("public"));
+//app.use(express.static("public"));
 
 // Підключення middleware для обробки даних з форм
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Налаштування Multer для завантаження файлів
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/images'); // Зберігаємо файли в папці public/images
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
+//onst storage = multer.diskStorage({
+ // destination: function (req, file, cb) {
+  //  cb(null, './public/images'); // Зберігаємо файли в папці public/images
+ // },
+  //filename: function (req, file, cb) {
+ // //  cb(null, file.originalname);
+ // }
+//});
 
-const upload = multer({ storage: storage });
+//const upload = multer({ storage: storage });
 
 // Обробка GET запиту для відображення головної сторінки
 app.get('/', function (req, res) {
@@ -42,9 +42,10 @@ app.get('/', function (req, res) {
 });
 
 // Обробка POST запиту для додавання нового користувача
-app.post('/add', upload.single('avatar'), async (req, res) => {
-  const { name, age } = req.body;
-  const avatar = req.file.path; // Шлях до завантаженого аватару
+app.post('/add',  async (req, res) => {
+  const { name, age , avatar} = req.body;
+  //const avatar = req.file.path; // Шлях до завантаженого аватару
+
   const newCart = new Cart({ name, age, avatar }); // Створення нового об'єкту користувача з даними та аватаром
   await newCart.save(); // Збереження користувача в базу даних
   res.render('result', { name, age, avatar }); // Рендерінг шаблону result.ejs з даними користувача
@@ -60,6 +61,14 @@ app.get('/all', async (req, res) => {
   const AllCart = await Cart.find(); // Отримання всіх користувачів з бази даних
   res.render('all', { AllCart }); // Рендерінг шаблону all.ejs з даними про всіх користувачів
 });
+
+app.post('/delete/:id', async (req, res) => {
+  const { id } = req.params;//<form action="/delete/<%= user._id %>"> тому params
+  console.log(id);
+  await Cart.deleteOne({ _id: id });
+; // Видалення користувача з бази даних
+  res.redirect('/all');
+})
 
 // Функція для підключення до бази даних та запуску сервера
 const start = async () => {

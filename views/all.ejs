@@ -65,6 +65,9 @@
                     <div class="user-age">Вік: <%= user.age %></div>
                 </div>
             </div>
+            <form action="/delete/<%= user._id %>"method="post">
+                <button type="submit">Delete</button>
+            </form>
         <% }); %>
     <% } else { %>
         <p>Немає жодного користувача</p>
