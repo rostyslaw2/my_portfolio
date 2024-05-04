@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Home</h1>
-    <h2>About</h2>
-    <h4>Documentation</h4>
-    <form action="/add" method="post">
-      <label for="name">Ім'я:</label>
-      <input type="text" id="name" name="name" required />
-      <br />
-      <label for="email">Email:</label>
-    
-      <label for="age">age:</label>
-      <input type="age" id="age" name="age" required />
-      <br />
-      <input type="submit" value="Відправити" />
-    </form>
-  </body>
-</html>
-
+<form action="/add" method="post" enctype="multipart/form-data"> <!-- Додаємо enctype для завантаження файлів -->
+  <label for="name">Ім'я:</label>
+  <input type="text" id="name" name="name" required />
+  <br />
+  <label for="age">Age:</label>
+  <input type="text" id="age" name="age" required />
+  <br />
+  <label for="avatar">Avatar:</label>
+  <input type="file" id="avatar" name="avatar" accept="image/*" required /> <!-- Поле для завантаження файлу -->
+  <br />
+  <input type="submit" value="Відправити" />
+</form>

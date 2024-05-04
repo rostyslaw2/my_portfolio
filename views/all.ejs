@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-  <%if(AllCart.length > 0){ %> <% AllCart.forEach(card => { %>
-    <h1><%=card.name%></h1>
-    <h1><%=card.age%></h1>
+<% if (AllCart.length > 0) { %>
+  <% AllCart.forEach(card => { %>
+    <h1><%= card.name %></h1>
+    <h1><%= card.age %></h1>
+    <img src="<%= card.avatar %>" alt="Avatar" /> <!-- Відображення аватару -->
     <hr />
-    <% }); %> <% } else { %>
-        <h3>No cards yet</h3>
-        <% } %>
-</body>
-</html>
+  <% }); %>
+<% } else { %>
+  <h3>No cards yet</h3>
+<% } %>
