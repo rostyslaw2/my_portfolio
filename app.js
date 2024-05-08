@@ -17,26 +17,12 @@ const port = process.env.PORT || 3000;
 
 // Встановлення шляху до папки views для статичних файлів
 app.use(express.static(__dirname + "/views"));
-// Встановлення шляху до папки public для статичних файлів (наприклад, CSS, JavaScript)
-//app.use(express.static("public"));
+
 
 // Підключення middleware для обробки даних з форм
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Налаштування Multer для завантаження файлів
-//onst storage = multer.diskStorage({
- // destination: function (req, file, cb) {
-  //  cb(null, './public/images'); // Зберігаємо файли в папці public/images
- // },
-  //filename: function (req, file, cb) {
- // //  cb(null, file.originalname);
- // }
-//});
-
-//const upload = multer({ storage: storage });
-
-// Обробка GET запиту для відображення головної сторінки
 app.get('/', function (req, res) {
   res.render('house'); // Рендерінг шаблону house.ejs
 });
