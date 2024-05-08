@@ -1,10 +1,10 @@
 const { Schema, model } = require('mongoose');
 
-const CartSchema = new Schema({
+const usersSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true // Ensure uniqueness of email
+ 
     },
     password: {
         type: String,
@@ -12,4 +12,4 @@ const CartSchema = new Schema({
     }
 });
 
-module.exports = model('newCart', CartSchema);
+module.exports = model('users', usersSchema);

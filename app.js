@@ -2,13 +2,13 @@ const express = require('express');
 const app = express();
 const ejs = require('ejs')
 const mongoose = require('mongoose')
-//const multer = require('multer'); // Для обробки завантажених файлів
 const path = require('path');
 
 // Підключення dotenv для завантаження змінних середовища з файлу .env
 require("dotenv").config();
 // Підключення моделі Cart1 для роботи з даними користувачів
 const Cart = require("./models/Cart1");
+const Users = require("./models/users");
 
 // Налаштування шаблонізатора EJS
 app.engine("ejs", require("ejs").renderFile);
@@ -21,20 +21,31 @@ app.use(express.static(__dirname + "/views"));
 
 // Підключення middleware для обробки даних з форм
 const bodyParser = require('body-parser');
+const users = require('./models/users');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', function (req, res) {
   res.render('house'); // Рендерінг шаблону house.ejs
 });
 
+app.post('/addusers',  async (req, res) => {
+  const { email,password } = req.body;
+
+
+  const newUsers = new Users({ email,password });
+  await newUsers.save(); 
+  res.redirect('/all');
+ // res.render('allusers', { email,password}); 
+});
+
 // Обробка POST запиту для додавання нового користувача
 app.post('/add',  async (req, res) => {
   const { name, age , avatar} = req.body;
-  //const avatar = req.file.path; // Шлях до завантаженого аватару
+
 
   const newCart = new Cart({ name, age, avatar }); // Створення нового об'єкту користувача з даними та аватаром
   await newCart.save(); // Збереження користувача в базу даних
-  res.render('result', { name, age, avatar }); // Рендерінг шаблону result.ejs з даними користувача
+  res.redirect('/all');
 });
 
 // Обробка GET запиту для відображення сторінки "basa"
@@ -45,13 +56,23 @@ app.get('/basa', function (req, res) {
 // Обробка GET запиту для відображення всіх користувачів
 app.get('/all', async (req, res) => {
   const AllCart = await Cart.find(); // Отримання всіх користувачів з бази даних
-  res.render('all', { AllCart }); // Рендерінг шаблону all.ejs з даними про всіх користувачів
+  const allusers = await Users.find();
+  res.render('all', { AllCart, allusers } ); // Рендерінг шаблону all.ejs з даними про всіх користувачів
 });
+
+
 
 app.post('/delete/:id', async (req, res) => {
   const { id } = req.params;//<form action="/delete/<%= user._id %>"> тому params
   console.log(id);
   await Cart.deleteOne({ _id: id });
+; // Видалення користувача з бази даних
+  res.redirect('/all');
+})
+app.post('/deleteuser/:id', async (req, res) => {
+  const { id } = req.params;//<form action="/delete/<%= user._id %>"> тому params
+ 
+  await Users.deleteOne({ _id: id });
 ; // Видалення користувача з бази даних
   res.redirect('/all');
 })

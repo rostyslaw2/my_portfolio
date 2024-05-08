@@ -57,6 +57,7 @@
 <body>
     <div class="container">
         <h1>Всі користувачі</h1>
+
         <% if(AllCart.length > 0) { %>
             <% AllCart.forEach(user => { %>
                 <div class="user">
@@ -69,6 +70,26 @@
                     </div>
                 </div>
                 <form action="/delete/<%= user._id %>" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            <% }); %>
+        <% } else { %>
+            <p>Немає жодного користувача</p>
+        <% } %>
+    </div>
+    <hr/>
+    <div class="container">
+        <h1>Всі логіни</h1>
+        <% if(allusers.length > 0) { %>
+            <% allusers.forEach(user => { %>
+                <div class="user">
+  
+                    <div class="user-details">
+                        <div class="user-email"><%= user.email %></div>
+                        <div class="user-password">пароль: <%= user.password %></div>
+                    </div>
+                </div>
+                <form action="/deleteuser/<%= user._id %>" method="post">
                     <button type="submit">Delete</button>
                 </form>
             <% }); %>
