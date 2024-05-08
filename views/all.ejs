@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Всі користувачі</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 20px;
             background-color: #f4f4f4;
@@ -53,24 +55,26 @@
     </style>
 </head>
 <body>
-    <h1>Всі користувачі</h1>
-    <% if(AllCart.length > 0) { %>
-        <% AllCart.forEach(user => { %>
-            <div class="user">
-                <div class="avatar">
-                    <img src="<%= user.avatar %>" alt="Avatar">
+    <div class="container">
+        <h1>Всі користувачі</h1>
+        <% if(AllCart.length > 0) { %>
+            <% AllCart.forEach(user => { %>
+                <div class="user">
+                    <div class="avatar">
+                        <img src="<%= user.avatar %>" alt="Avatar">
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name"><%= user.name %></div>
+                        <div class="user-age">Вік: <%= user.age %></div>
+                    </div>
                 </div>
-                <div class="user-details">
-                    <div class="user-name"><%= user.name %></div>
-                    <div class="user-age">Вік: <%= user.age %></div>
-                </div>
-            </div>
-            <form action="/delete/<%= user._id %>"method="post">
-                <button type="submit">Delete</button>
-            </form>
-        <% }); %>
-    <% } else { %>
-        <p>Немає жодного користувача</p>
-    <% } %>
+                <form action="/delete/<%= user._id %>" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            <% }); %>
+        <% } else { %>
+            <p>Немає жодного користувача</p>
+        <% } %>
+    </div>
 </body>
 </html>

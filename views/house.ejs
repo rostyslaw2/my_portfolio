@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Додати користувача</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
         }
 
         form {
@@ -21,23 +24,32 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
         }
 
-        form label {
+        h2 {
+            margin-top: 0;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
             display: block;
-            margin-bottom: 10px;
         }
 
-        form input[type="text"], form input[type="file"], form input[type="password"] {
-            width: calc(100% - 20px);
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box;
         }
 
-        form input[type="submit"] {
+        input[type="submit"] {
             background-color: #007bff;
             color: #fff;
             padding: 10px 20px;
@@ -47,36 +59,28 @@
             transition: background-color 0.3s ease;
         }
 
-        form input[type="submit"]:hover {
+        input[type="submit"]:hover {
             background-color: #0056b3;
         }
-
-        .avatar-preview {
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .avatar-preview img {
-            max-width: 100px;
-            max-height: 100px;
-            border-radius: 50%;
-        }
     </style>
-    <a href="/all" >відкрити всі</a>
+    <a href="/all">Відкрити всі</a> <!-- Посилання на сторінку зі списком користувачів -->
 </head>
 <body>
-    <form action="/add" method="post">
-        <h2>Додати користувача</h2>
-        <label for="name">Ім'я:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="age">Вік:</label>
-        <input type="text" id="age" name="age" required>
-        <label for="avatar">Аватар:</label>
-        <input type="text" id="avatar" name="avatar" required>
-           
-        <input type="submit" value="Додати користувача">
-    </form>
-
-
+    <div class="container">
+        <form action="/add" method="post">
+            <h2>Додати користувача</h2>
+            <label for="name">Ім'я:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="age">Вік:</label>
+            <input type="text" id="age" name="age" required>
+            <label for="avatar">Аватар:</label>
+            <input type="text" id="avatar" name="avatar" required>
+            <label for="email">Електронна пошта:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Додати користувача">
+        </form>
+    </div>
 </body>
 </html>
